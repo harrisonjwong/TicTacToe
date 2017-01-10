@@ -8,3 +8,10 @@
 
 import UIKit
 
+class TTTView : UIView {
+    
+    var graphicColony = [CGRect]()
+    
+    
+}
+

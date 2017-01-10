@@ -6,6 +6,8 @@
 //  Copyright © 2017 Harrison Wong. All rights reserved.
 //
 
+// Handles touches and calculations
+
 import UIKit
 
 class ViewController: UIViewController {
@@ -19,7 +21,7 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
 }
 
