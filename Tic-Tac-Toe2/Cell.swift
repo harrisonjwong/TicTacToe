@@ -6,7 +6,7 @@
 //  Copyright © 2017 Harrison Wong. All rights reserved.
 //
 
-// 0 = blank; 1 = red; 2 = blue
+// 0 = blank; 1 = X; 2 = O
 
 import Foundation
 
@@ -20,19 +20,26 @@ func ==(left: Cell, right: Cell)-> Bool {
 
 struct Cell : CustomStringConvertible, Hashable {
     
-    var value: Int
+    var x: Int
+    var y: Int
+    var value: Int = 0
     var hashValue: Int {
         get {
             return value
         }
     }
     
-    init (value: Int) {
-        self.value = value
+    init (x: Int, y: Int) {
+        self.x = x
+        self.y = y
     }
     
-    func getData()-> Int {
+    func getValue()-> Int {
         return value
+    }
+    
+    mutating func setValue(data: Int) {
+        value = data
     }
     
     var description: String {
