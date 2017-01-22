@@ -38,10 +38,6 @@ struct Cell : CustomStringConvertible, Hashable {
         return value
     }
     
-    mutating func setValue(data: Int) {
-        value = data
-    }
-    
     var description: String {
         return "\(value)"
     }

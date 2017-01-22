@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreGraphics
 
 struct Line {
     var begin = CGPoint.zero
@@ -15,13 +16,18 @@ struct Line {
 
 class TTTView : UIView {
     
+    
     var board: TTTBoard!
     var border = CGRect()
     var dimensions: CGFloat = 3
+    var graphicCells1 = [CGRect]()
+    var graphicCells2 = [CGRect]()
+    var graphicEdit: Bool = true //true means adding, false means do nothing
+
     
-    func strokeLine(_ line: Line) {
+    func strokeLine(_ line: Line, width: CGFloat) {
         let path = UIBezierPath()
-        path.lineWidth = 3
+        path.lineWidth = width
         path.lineCapStyle = CGLineCap.round
         path.move(to: line.begin)
         path.addLine(to: line.end)
@@ -35,23 +41,64 @@ class TTTView : UIView {
         //up-down left
         l.begin = CGPoint(x: 408.67, y: 117)
         l.end = CGPoint(x: 408.67, y: 617)
-        strokeLine(l)
+        strokeLine(l, width: 4)
         //up-down right
         l.begin = CGPoint(x: 575.33, y: 117)
         l.end = CGPoint(x: 575.33, y: 617)
-        strokeLine(l)
+        strokeLine(l, width: 4)
         //left-right upper
         l.begin = CGPoint(x: 242, y: 283.67)
         l.end = CGPoint(x: 742, y: 283.67)
-        strokeLine(l)
+        strokeLine(l, width: 4)
         //left-right lower
         l.begin = CGPoint(x: 242, y: 450.33)
         l.end = CGPoint(x: 742, y: 450.33)
-        strokeLine(l)
+        strokeLine(l, width: 4)
         
         border = makeFrame(rect)
-        let borderPath = UIBezierPath(rect: border)
-        borderPath.stroke()
+//        let borderPath = UIBezierPath(rect: border)
+//        borderPath.stroke()
+        
+        UIColor.red.setStroke()
+        for cells in graphicCells1 {
+            strokeX(cells)
+        }
+        
+        UIColor.blue.setStroke()
+        for cells in graphicCells2 {
+            strokeCircle(cells)
+        }
+    }
+    
+    func strokeX(_ c: CGRect) {
+        let rekt = c.insetBy(dx: 25, dy: 25)
+        var l = Line()
+        l.begin = CGPoint(x: rekt.minX, y: rekt.minY)
+        l.end = CGPoint(x: rekt.maxX, y: rekt.maxY)
+        strokeLine(l, width: 3)
+        l.begin = CGPoint(x: rekt.minX, y: rekt.maxY)
+        l.end = CGPoint(x: rekt.maxX, y: rekt.minY)
+        strokeLine(l, width: 3)
+
+    }
+    
+    func strokeCircle(_ c: CGRect) {
+        let rekt = c.insetBy(dx: 25, dy: 25)
+        let path = UIBezierPath(ovalIn: rekt)
+        path.lineWidth = 3
+        path.lineCapStyle = CGLineCap.round
+        path.stroke()
+    }
+    
+    func updateGraphic() {
+        graphicCells1 = []
+        graphicCells2 = []
+        for cell in board.boardCells {
+            if cell.value != 0 {
+                addCell(cell.x, yCoor: cell.y)
+            }
+        }
+        setNeedsDisplay()   //updates it after evolving
     }
     
     func makeFrame(_ rect: CGRect) -> CGRect {
@@ -60,5 +107,32 @@ class TTTView : UIView {
         return r
     }
     
+    func convertPixelToCoorX(_ x: CGFloat) -> Int {
+        return Int(floor((x - makeFrame(bounds).minX)/(makeFrame(bounds).width/3)))
+    }
+    
+    func convertPixelToCoorY(_ y: CGFloat) -> Int {
+        return Int(floor((y - makeFrame(bounds).minY)/(makeFrame(bounds).height/3)))
+    }
+    
+    func convertCoorToGridX(_ x: Int) -> CGFloat {
+        return makeFrame(bounds).minX + CGFloat(x)*(makeFrame(bounds).width/dimensions)
+    }
+    
+    func convertCoorToGridY(_ y: Int) -> CGFloat {
+        return makeFrame(bounds).minY + CGFloat(y)*(makeFrame(bounds).height/dimensions)
+    }
+    
+    func addCell(_ xCoor: Int, yCoor: Int) {
+        let aCell = CGRect(x: convertCoorToGridX(xCoor), y: convertCoorToGridY(yCoor), width: makeFrame(bounds).width/dimensions, height: makeFrame(bounds).height/dimensions)
+        if board.currentPlayer == 1 {
+            board.changeValueXY(x: xCoor, y: yCoor)
+            graphicCells1.append(aCell)
+        } else if board.currentPlayer == 2 {
+            board.changeValueXY(x: xCoor, y: yCoor)
+            graphicCells2.append(aCell)
+        }
+
+    }
 }
 

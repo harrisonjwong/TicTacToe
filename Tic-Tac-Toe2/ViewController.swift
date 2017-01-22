@@ -12,70 +12,80 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var board: TTTBoard!
-    var tttView: TTTView!
-
+    var board = TTTBoard()
+    @IBOutlet var tttView: TTTView!
+    
+    var isGameOver: Bool = false
+    
+    @IBAction func resetGame(_ sender: Any) {
+        board.resetBoard()
+        self.tttView.updateGraphic()
+        isGameOver = false
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureView()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        if board != nil {
-//            
-//            let touch = touches.first!
-//            
-//            let location = touch.location(in: tttView)
-//            
-//            if tttView.makeFrame(tttView.bounds).contains(location) {
-//                if tttView.board.doesCellHaveValue(c: <#T##Cell#>)(Cell(xCoor: colonyView.convertPixelToCoorX(location.x), yCoor: colonyView.convertPixelToCoorY(location.y))) {
-//                    recentCellLabel = colonyView.removeCell(colonyView.convertPixelToCoorX(location.x), yCoor: colonyView.convertPixelToCoorY(location.y))
-//                    
-//                    colonyView.graphicEdit = false
-//                } else {
-//                    recentCellLabel = colonyView.addCell(colonyView.convertPixelToCoorX(location.x), yCoor: colonyView.convertPixelToCoorY(location.y))
-//                    colonyView.graphicEdit = true
-//                }
-//            }
-//            colonyView.setNeedsDisplay()
-//        }
-//    }
-//   
-//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        if detailItem != nil {
-//            let touch = touches.first!
-//            
-//            let location = touch.location(in: colonyView)
-//            
-//            var recentCellLabel = ""
-//            
-//            if colonyView.makeFrame(colonyView.bounds).contains(location) {
-//                if !colonyView.graphicEdit {
-//                    recentCellLabel = colonyView.removeCell(colonyView.convertPixelToCoorX(location.x), yCoor: colonyView.convertPixelToCoorY(location.y))
-//                } else {
-//                    recentCellLabel = colonyView.addCell(colonyView.convertPixelToCoorX(location.x), yCoor: colonyView.convertPixelToCoorY(location.y))
-//                }
-//            }
-//            if recentCellLabel == "" {
-//                coorLabel.text = "(-1, -1)"
-//            } else {
-//                coorLabel.text = recentCellLabel
-//            }
-//            colonyView.setNeedsDisplay()
-//        }
-//    }
-//    
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        if detailItem != nil {
-//            colonyView.graphicEdit = true
-//        }
-//    }
-
+    func configureView() {
+        if let view = self.tttView {
+            view.board = self.board
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        print(#function)
+        if isGameOver != true {
+            
+            let touch = touches.first!
+            
+            let location = touch.location(in: tttView)
+            
+            if tttView.makeFrame(tttView.bounds).contains(location) {
+                if tttView.board.doesCellHaveValue(x: tttView.convertPixelToCoorX(location.x), y: tttView.convertPixelToCoorY(location.y)) {
+                    
+                    tttView.graphicEdit = false
+                } else {
+                    tttView.addCell(tttView.convertPixelToCoorX(location.x), yCoor: tttView.convertPixelToCoorY(location.y))
+                    tttView.graphicEdit = true
+                }
+                tttView.setNeedsDisplay()
+            }
+//            print(board)
+            if board.winner != 0 {
+                var title: String = ""
+                if board.winner == 1 {
+                    title = "Player 1 wins!"
+                } else if board.winner == 2 {
+                    title = "Player 2 wins!"
+                } else if board.winner == 3 {
+                    title = "Tie game!"
+                }
+                let ac = UIAlertController(title: title, message: "", preferredStyle: UIAlertControllerStyle.alert)
+                let seeBoardAction = UIAlertAction(title: "See Board", style: .cancel,
+                                                   handler: { (action) -> Void in
+                                                    self.isGameOver = true
+                })
+                ac.addAction(seeBoardAction)
+                let resetAction = UIAlertAction(title: "Reset Game", style: .destructive,
+                                                handler: { (action) -> Void in
+                                                    self.board.resetBoard()
+                                                    self.tttView.updateGraphic() })
+                ac.addAction(resetAction)
+                self.present(ac, animated: true, completion: nil)
+                
+            }
+        }
+        
+    }
+    
     
 }
+
 

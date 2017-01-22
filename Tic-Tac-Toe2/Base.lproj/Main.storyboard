@@ -26,15 +26,28 @@
                                 <rect key="frame" x="20" y="28" width="984" height="732"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zAV-9A-PJR">
+                                <rect key="frame" x="470" y="703" width="84" height="30"/>
+                                <state key="normal" title="Reset Game"/>
+                                <connections>
+                                    <action selector="resetGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zCa-8l-BdN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="zAV-9A-PJR" secondAttribute="trailing" constant="450" id="9fx-uw-VcD"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="RSY-Er-YkK" secondAttribute="bottom" constant="8" id="CG6-Ju-RHP"/>
+                            <constraint firstItem="zAV-9A-PJR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="450" id="Ci3-g0-01E"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="zAV-9A-PJR" secondAttribute="bottom" constant="35" id="cIX-Ms-p0C"/>
                             <constraint firstItem="RSY-Er-YkK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="hqk-KM-14o"/>
                             <constraint firstAttribute="trailingMargin" secondItem="RSY-Er-YkK" secondAttribute="trailing" id="ldO-TS-4Gi"/>
                             <constraint firstItem="RSY-Er-YkK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="r3z-J2-ngy"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tttView" destination="RSY-Er-YkK" id="jZg-JV-0C7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
