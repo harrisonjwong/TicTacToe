@@ -16,12 +16,16 @@ class TTTBoard : CustomStringConvertible {
     
     var boardCells: [Cell] = [Cell(x: 0, y: 0), Cell(x: 1, y: 0), Cell(x: 1, y: 2), Cell(x: 0, y: 1), Cell(x: 1, y: 1), Cell(x: 2, y: 1), Cell(x: 0, y: 2), Cell(x: 1, y: 2), Cell(x: 2, y: 2)]
     
-    var expertMode: Bool = false
+    var expertMode: Bool = false {
+        didSet {
+            print(expertMode)
+        }
+    }
     
     var winner: Int = 0
     
     var currentPlayer: Int = 1
-    
+        
     func swapPlayer() {
         if currentPlayer == 1 {
             currentPlayer += 1
@@ -63,11 +67,11 @@ class TTTBoard : CustomStringConvertible {
         return false
     }
     
-    func checkForEmptyCells()-> Set<Cell> {
-        var emptyCells: Set<Cell> = []
+    func checkForEmptyCells()-> Array<Cell> {
+        var emptyCells: Array<Cell> = []
         for c in boardCells {
             if c.value == 0 {
-                emptyCells.insert(c)
+                emptyCells.append(c)
             }
         }
         return emptyCells
@@ -100,6 +104,7 @@ class TTTBoard : CustomStringConvertible {
             }
         }
         endTurn()
+        
     }
     
     func endTurn() {

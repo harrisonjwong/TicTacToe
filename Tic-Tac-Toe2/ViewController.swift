@@ -14,8 +14,16 @@ class ViewController: UIViewController {
     
     var board = TTTBoard()
     @IBOutlet var tttView: TTTView!
-    
+    @IBOutlet var expertModeSwitch: UISwitch!
     var isGameOver: Bool = false
+    
+    func stateChanged(_ switchState: UISwitch) {
+        if switchState.isOn {
+            tttView.board.expertMode = true
+        } else {
+            tttView.board.expertMode = false
+        }
+    }
     
     @IBAction func resetGame(_ sender: Any) {
         board.resetBoard()
@@ -36,6 +44,7 @@ class ViewController: UIViewController {
     func configureView() {
         if let view = self.tttView {
             view.board = self.board
+            expertModeSwitch.addTarget(self, action: #selector(ViewController.stateChanged(_:)), for: UIControlEvents.valueChanged)
         }
     }
     

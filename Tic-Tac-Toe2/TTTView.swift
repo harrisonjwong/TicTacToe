@@ -124,15 +124,50 @@ class TTTView : UIView {
     }
     
     func addCell(_ xCoor: Int, yCoor: Int) {
-        let aCell = CGRect(x: convertCoorToGridX(xCoor), y: convertCoorToGridY(yCoor), width: makeFrame(bounds).width/dimensions, height: makeFrame(bounds).height/dimensions)
-        if board.currentPlayer == 1 {
-            board.changeValueXY(x: xCoor, y: yCoor)
-            graphicCells1.append(aCell)
-        } else if board.currentPlayer == 2 {
-            board.changeValueXY(x: xCoor, y: yCoor)
-            graphicCells2.append(aCell)
+        if board.expertMode == false {
+            let aCell = CGRect(x: convertCoorToGridX(xCoor), y: convertCoorToGridY(yCoor), width: makeFrame(bounds).width/dimensions, height: makeFrame(bounds).height/dimensions)
+            if board.currentPlayer == 1 {
+                board.changeValueXY(x: xCoor, y: yCoor)
+                graphicCells1.append(aCell)
+            } else if board.currentPlayer == 2 {
+                board.changeValueXY(x: xCoor, y: yCoor)
+                graphicCells2.append(aCell)
+            }
+        } else if board.expertMode == true {
+            let chance = Int(arc4random_uniform(UInt32(10)))
+            print(chance)
+            if chance == 0 || chance == 1 || chance == 2 {
+                print("random cell being chosen")
+                var empty = [Int]()
+                for i in 0...8 {     // for each cell
+                    if board.boardCells[i].value == 0 {  //if it's empty
+                        if board.boardCells[i].x != xCoor && board.boardCells[i].y != yCoor { // and not the cell selected
+                            empty.append(i) // add the index to the empty array
+                        }
+                    }
+                }
+                let randIndex = Int(arc4random_uniform(UInt32(empty.count))) //random index of indexes array
+                let chosenCell = board.boardCells[empty[randIndex]]
+                let aCell = CGRect(x: convertCoorToGridX(chosenCell.x), y: convertCoorToGridY(chosenCell.y), width: makeFrame(bounds).width/dimensions, height: makeFrame(bounds).height/dimensions)
+                if board.currentPlayer == 1 {
+                    board.changeValueXY(x: chosenCell.x, y: chosenCell.y)
+                    graphicCells1.append(aCell)
+                } else if board.currentPlayer == 2 {
+                    board.changeValueXY(x: chosenCell.x, y: chosenCell.y)
+                    graphicCells2.append(aCell)
+                }
+            } else {
+                print("correct cell being chosen")
+                let aCell = CGRect(x: convertCoorToGridX(xCoor), y: convertCoorToGridY(yCoor), width: makeFrame(bounds).width/dimensions, height: makeFrame(bounds).height/dimensions)
+                if board.currentPlayer == 1 {
+                    board.changeValueXY(x: xCoor, y: yCoor)
+                    graphicCells1.append(aCell)
+                } else if board.currentPlayer == 2 {
+                    board.changeValueXY(x: xCoor, y: yCoor)
+                    graphicCells2.append(aCell)
+                }
+            }
         }
-
     }
-}
 
+}
