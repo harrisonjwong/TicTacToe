@@ -16,15 +16,26 @@ class TTTBoard : CustomStringConvertible {
     
     var boardCells: [Cell] = [Cell(x: 0, y: 0), Cell(x: 1, y: 0), Cell(x: 2, y: 0), Cell(x: 0, y: 1), Cell(x: 1, y: 1), Cell(x: 2, y: 1), Cell(x: 0, y: 2), Cell(x: 1, y: 2), Cell(x: 2, y: 2)]
     
+    var tournamentMode: Bool = false
+    var winsP1 = 0
+    var winsP2 = 0
+    var totalGames: Int = 1
+    var totalGamesNecessaryToWin: Int {
+        return Int(round(Double(totalGames/2)) + 1)
+    }
+    var tournamentWin: Int = 0
+    var currentGame: Int = 1
+    
+    func resetTournament() {
+        currentGame = 1
+        winsP1 = 0
+        winsP2 = 0
+        totalGames = 1
+        tournamentWin = 0
+    }
+    
     var expertMode: Bool = false
-//        {
-//        didSet {
-//            print(expertMode)
-//        }
-//    }
-    
     var winner: Int = 0
-    
     var currentPlayer: Int = 1
         
     func swapPlayer() {
@@ -134,15 +145,38 @@ class TTTBoard : CustomStringConvertible {
     }
     
     func endTurn() {
-        let c = checkForWinner()
-        if c != -1 {
-            winner = c
-        } else {
-            if checkForTie() {
-                winner = 3
+        if tournamentMode == false {
+            let c = checkForWinner()
+            if c != -1 {
+                winner = c
+            } else {
+                if checkForTie() {
+                    winner = 3
+                }
             }
+            swapPlayer()
+        } else if tournamentMode == true {
+            let c = checkForWinner()
+            if c != -1 && c != 3 {
+                winner = c
+                currentGame += 1
+                if winner == 1 {
+                    winsP1 += 1
+                } else if winner == 2 {
+                    winsP2 += 1
+                }
+            } else {
+                if checkForTie() {
+                    winner = 3
+                }
+            }
+            if winsP1 == totalGamesNecessaryToWin {
+                tournamentWin = 1
+            } else if winsP2 == totalGamesNecessaryToWin {
+                tournamentWin = 2
+            }
+            swapPlayer()
         }
-        swapPlayer()
     }
     
     func resetBoard() {
@@ -153,38 +187,51 @@ class TTTBoard : CustomStringConvertible {
         currentPlayer = 1
     }
     
+    func checkForWinnerHelper(a: Int, b: Int, c: Int)-> Int{
+        if boardCells[a].value != 0 && boardCells[b].value != 0 && boardCells[c].value != 0 && boardCells[a].value == boardCells[b].value && boardCells[b].value == boardCells[c].value && boardCells[a].value == boardCells[c].value {
+            return boardCells[b].value
+        } else {
+            return 0
+        }
+    }
+    
     func checkForWinner()-> Int {
         var exitValue: Int = 0
-
-        if boardCells[0].value == boardCells[1].value && boardCells[1].value == boardCells[2].value {
-            exitValue = boardCells[2].value
-        }
-        if boardCells[3].value == boardCells[4].value && boardCells[4].value == boardCells[5].value {
-            exitValue =  boardCells[4].value
-        }
-        if boardCells[6].value == boardCells[7].value && boardCells[7].value == boardCells[8].value {
-            exitValue = boardCells[7].value
-        }
-        if boardCells[0].value == boardCells[3].value && boardCells[3].value == boardCells[6].value {
-            exitValue = boardCells[6].value
-        }
-        if boardCells[1].value == boardCells[4].value && boardCells[4].value == boardCells[7].value {
-            exitValue = boardCells[4].value
-        }
-        if boardCells[2].value == boardCells[5].value && boardCells[5].value == boardCells[8].value {
-            exitValue = boardCells[5].value
-        }
-        if boardCells[0].value == boardCells[4].value && boardCells[4].value == boardCells[8].value {
-            exitValue = boardCells[4].value
-        }
-        if boardCells[2].value == boardCells[4].value && boardCells[4].value == boardCells[6].value {
-            exitValue = boardCells[4].value
-        }
+        
+        exitValue = checkForWinnerHelper(a: 0, b: 1, c: 2)
         if exitValue != 0 {
             return exitValue
-        } else {
-            return -1
         }
+        exitValue = checkForWinnerHelper(a: 3, b: 4, c: 5)
+        if exitValue != 0 {
+            return exitValue
+        }
+        exitValue = checkForWinnerHelper(a: 6, b: 7, c: 8)
+        if exitValue != 0 {
+            return exitValue
+        }
+        exitValue = checkForWinnerHelper(a: 0, b: 3, c: 6)
+        if exitValue != 0 {
+            return exitValue
+        }
+        exitValue = checkForWinnerHelper(a: 1, b: 4, c: 7)
+        if exitValue != 0 {
+            return exitValue
+        }
+        exitValue = checkForWinnerHelper(a: 2, b: 5, c: 8)
+        if exitValue != 0 {
+            return exitValue
+        }
+        exitValue = checkForWinnerHelper(a: 0, b: 4, c: 8)
+        if exitValue != 0 {
+            return exitValue
+        }
+        exitValue = checkForWinnerHelper(a: 2, b: 4, c: 6)
+        if exitValue != 0 {
+            return exitValue
+        }
+        return -1
+
     }
     
     func checkForTie()-> Bool {

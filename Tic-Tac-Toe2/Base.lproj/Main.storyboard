@@ -26,37 +26,98 @@
                                 <rect key="frame" x="20" y="28" width="984" height="732"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zAV-9A-PJR">
-                                <rect key="frame" x="470" y="703" width="84" height="30"/>
-                                <state key="normal" title="Reset Game"/>
-                                <connections>
-                                    <action selector="resetGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zCa-8l-BdN"/>
-                                </connections>
-                            </button>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1hE-Gw-yoJ" userLabel="Expert Mode">
-                                <rect key="frame" x="947" y="702" width="51" height="31"/>
-                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tic-Tac-Toe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YSh-9O-ErA" userLabel="Controls">
+                                <rect key="frame" x="352" y="70" width="320" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="N3q-Ka-hvY">
+                                <rect key="frame" x="815.5" y="45" width="163.5" height="698"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Controls" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uQz-zg-t8x" userLabel="Controls">
+                                        <rect key="frame" x="22.5" y="0.0" width="119" height="145.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zAV-9A-PJR">
+                                        <rect key="frame" x="27" y="145.5" width="110" height="136.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Reset Game">
+                                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="resetGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zCa-8l-BdN"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expert Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HhZ-4H-3UG" userLabel="Expert Mode">
+                                        <rect key="frame" x="25" y="282" width="114" height="90.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1hE-Gw-yoJ" userLabel="Expert Mode">
+                                        <rect key="frame" x="57.5" y="372.5" width="51" height="117.5"/>
+                                    </switch>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tournament Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i8F-tH-kva">
+                                        <rect key="frame" x="0.0" y="490" width="163.5" height="90.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qcy-Qz-tMS" userLabel="Tournament Mode">
+                                        <rect key="frame" x="57.5" y="580.5" width="51" height="117.5"/>
+                                    </switch>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NYu-F6-c4N">
+                                <rect key="frame" x="45" y="270" width="178" height="248"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eff-lE-Zbh" userLabel="Game Number">
+                                        <rect key="frame" x="86.5" y="0.0" width="5.5" height="124"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hrk-g3-41c" userLabel="Score">
+                                        <rect key="frame" x="86.5" y="124" width="5.5" height="124"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="zAV-9A-PJR" secondAttribute="trailing" constant="450" id="9fx-uw-VcD"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="RSY-Er-YkK" secondAttribute="bottom" constant="8" id="CG6-Ju-RHP"/>
-                            <constraint firstItem="zAV-9A-PJR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="450" id="Ci3-g0-01E"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="1hE-Gw-yoJ" secondAttribute="bottom" constant="35" id="Inh-x6-Swa"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="zAV-9A-PJR" secondAttribute="bottom" constant="35" id="cIX-Ms-p0C"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="1hE-Gw-yoJ" secondAttribute="trailing" constant="8" id="cet-U9-wME"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="NYu-F6-c4N" secondAttribute="bottom" constant="250" id="2y0-zj-W8N"/>
+                            <constraint firstItem="YSh-9O-ErA" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="3ma-PU-ZaW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="N3q-Ka-hvY" secondAttribute="trailing" constant="25" id="F6V-sg-o8s"/>
+                            <constraint firstItem="NYu-F6-c4N" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="25" id="PcH-Zc-BR4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YSh-9O-ErA" secondAttribute="trailing" constant="332" id="QqP-xs-ES2"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="RSY-Er-YkK" secondAttribute="bottom" constant="8" symbolic="YES" id="amP-Mz-oPk"/>
+                            <constraint firstItem="N3q-Ka-hvY" firstAttribute="centerY" secondItem="RSY-Er-YkK" secondAttribute="centerY" id="cVX-f0-9N0"/>
                             <constraint firstItem="RSY-Er-YkK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="hqk-KM-14o"/>
                             <constraint firstAttribute="trailingMargin" secondItem="RSY-Er-YkK" secondAttribute="trailing" id="ldO-TS-4Gi"/>
+                            <constraint firstItem="YSh-9O-ErA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="332" id="mwH-zT-2EF"/>
+                            <constraint firstItem="NYu-F6-c4N" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="250" id="nmD-kQ-hac"/>
                             <constraint firstItem="RSY-Er-YkK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="r3z-J2-ngy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="NYu-F6-c4N" secondAttribute="trailing" constant="781" id="wg2-I9-Kdx"/>
+                            <constraint firstItem="N3q-Ka-hvY" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="25" id="yLy-Q5-qPU"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="expertModeSwitch" destination="1hE-Gw-yoJ" id="Jk0-Ww-G4e"/>
+                        <outlet property="gameNumberLabel" destination="eff-lE-Zbh" id="PsN-pj-R7O"/>
+                        <outlet property="scoreLabel" destination="Hrk-g3-41c" id="Zci-AW-JHb"/>
+                        <outlet property="tournamentModeSwitch" destination="qcy-Qz-tMS" id="ud4-qO-osr"/>
                         <outlet property="tttView" destination="RSY-Er-YkK" id="jZg-JV-0C7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="33.984375" y="38.28125"/>
         </scene>
     </scenes>
 </document>

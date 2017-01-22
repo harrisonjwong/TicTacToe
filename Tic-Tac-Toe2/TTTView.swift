@@ -56,8 +56,6 @@ class TTTView : UIView {
         strokeLine(l, width: 4)
         
         border = makeFrame(rect)
-//        let borderPath = UIBezierPath(rect: border)
-//        borderPath.stroke()
         
         UIColor.red.setStroke()
         for cells in graphicCells1 {
