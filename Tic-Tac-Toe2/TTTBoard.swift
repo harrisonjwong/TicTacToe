@@ -14,13 +14,14 @@ class TTTBoard : CustomStringConvertible {
     //    01 11 21
     //    02 12 22
     
-    var boardCells: [Cell] = [Cell(x: 0, y: 0), Cell(x: 1, y: 0), Cell(x: 1, y: 2), Cell(x: 0, y: 1), Cell(x: 1, y: 1), Cell(x: 2, y: 1), Cell(x: 0, y: 2), Cell(x: 1, y: 2), Cell(x: 2, y: 2)]
+    var boardCells: [Cell] = [Cell(x: 0, y: 0), Cell(x: 1, y: 0), Cell(x: 2, y: 0), Cell(x: 0, y: 1), Cell(x: 1, y: 1), Cell(x: 2, y: 1), Cell(x: 0, y: 2), Cell(x: 1, y: 2), Cell(x: 2, y: 2)]
     
-    var expertMode: Bool = false {
-        didSet {
-            print(expertMode)
-        }
-    }
+    var expertMode: Bool = false
+//        {
+//        didSet {
+//            print(expertMode)
+//        }
+//    }
     
     var winner: Int = 0
     
@@ -34,8 +35,33 @@ class TTTBoard : CustomStringConvertible {
         }
     }
     
-    func setMode(mode: Bool) {
-        expertMode = mode
+    func sendMatchingCellIndex(x: Int, y: Int)-> Int {
+        if y == 0 {
+            if x == 0 {
+                return 0
+            } else if x == 1 {
+                return 1
+            } else if x == 2 {
+                return 2
+            }
+        } else if y == 1 {
+            if x == 0 {
+                return 3
+            } else if x == 1 {
+                return 4
+            } else if x == 2 {
+                return 5
+            }
+        } else if y == 2 {
+            if x == 0 {
+                return 6
+            } else if x == 1 {
+                return 7
+            } else if x == 2 {
+                return 8
+            }
+        }
+        return -1
     }
     
     func doesCellHaveValue(x: Int, y: Int)-> Bool {
