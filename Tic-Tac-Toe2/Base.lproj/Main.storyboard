@@ -42,9 +42,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zAV-9A-PJR">
-                                        <rect key="frame" x="27" y="145.5" width="110" height="136.5"/>
+                                        <rect key="frame" x="27.5" y="145.5" width="109" height="136.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Reset Game">
+                                        <state key="normal" title="Reset Board">
                                             <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>

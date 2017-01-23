@@ -35,6 +35,7 @@ class ViewController: UIViewController {
             tttView.board.resetBoard()
             tttView.board.resetTournament()
             tttView.updateGraphic()
+            isGameOver = false
             let alert = UIAlertController(title: "Choose Number of Games", message: "Odd numbers only", preferredStyle: UIAlertControllerStyle.alert)
             
             let saveAction = UIAlertAction(title: "Save", style: .default, handler: { (action: UIAlertAction!) in
@@ -43,7 +44,7 @@ class ViewController: UIViewController {
                 textField.keyboardType = UIKeyboardType.numberPad
                 
                 let games = Int(textField.text!)
-                if games != nil && games! % 2 != 0 {
+                if games != nil && games! % 2 != 0 && games! >= 1 {
                     self.tttView.board.totalGames = games!
                 } else {
                     self.tttView.board.totalGames = 1
