@@ -143,6 +143,7 @@ class ViewController: UIViewController {
 
                 if board.winner != 0 {
                     var title: String = ""
+                    turnLabel.text = ""
                     if board.winner == 1 {
                         title = "Player 1 wins!"
                     } else if board.winner == 2 {
@@ -150,6 +151,7 @@ class ViewController: UIViewController {
                     } else if board.winner == 3 {
                         title = "Tie game!"
                     }
+                    turnLabel.text = ""
                     let ac = UIAlertController(title: title, message: "", preferredStyle: UIAlertControllerStyle.alert)
                     let seeBoardAction = UIAlertAction(title: "See Board", style: .cancel,
                                                        handler: { (action) -> Void in
@@ -181,6 +183,8 @@ class ViewController: UIViewController {
                         } else if board.winner == 3 {
                             title = "Tie game!"
                         }
+                        self.turnLabel.text = ""
+                        self.gameNumberLabel.text = ""
                         let ac = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
                         let resetAction = UIAlertAction(title: "Reset Game", style: .destructive,
                                                         handler: { (action) -> Void in
@@ -193,6 +197,7 @@ class ViewController: UIViewController {
                         self.present(ac, animated: true, completion: nil)
                     } else if board.tournamentWin == 1 || board.tournamentWin == 2{
                         self.gameNumberLabel.text = ""
+                        self.turnLabel.text = ""
                         title = "Player \(board.tournamentWin) wins tournament!"
                         message = "Final Score: P1 \(board.winsP1)-\(board.winsP2) P2"
                         let ac = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
