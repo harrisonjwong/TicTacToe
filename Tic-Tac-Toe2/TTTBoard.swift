@@ -231,7 +231,6 @@ class TTTBoard : CustomStringConvertible {
             return exitValue
         }
         return -1
-
     }
     
     func checkForTie()-> Bool {

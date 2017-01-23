@@ -6,20 +6,30 @@
 //  Copyright © 2017 Harrison Wong. All rights reserved.
 //
 
-// Handles touches and calculations
-
 import UIKit
 
 class ViewController: UIViewController {
     
     var board = TTTBoard()
-    @IBOutlet var tttView: TTTView!
-    @IBOutlet var expertModeSwitch: UISwitch!
     var isGameOver: Bool = false
     
+    @IBOutlet var tttView: TTTView!
+    @IBOutlet var expertModeSwitch: UISwitch!
     @IBOutlet var scoreLabel: UILabel!
     @IBOutlet var tournamentModeSwitch: UISwitch!
     @IBOutlet var gameNumberLabel: UILabel!
+    @IBOutlet var nightModeSwitch: UISwitch!
+    @IBOutlet var outsideView: UIView!
+    @IBOutlet var turnLabel: UILabel!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureView()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
     
     func stateChanged(_ switchState: UISwitch) {
         if switchState.isOn {
@@ -29,12 +39,25 @@ class ViewController: UIViewController {
         }
     }
     
+    func stateChangedNightMode(_ switchState: UISwitch) {
+        if switchState.isOn {
+            tttView.nightMode = true
+            outsideView.backgroundColor = UIColor.gray
+            tttView.updateGraphic()
+        } else {
+            tttView.nightMode = false
+            outsideView.backgroundColor = UIColor.white
+            tttView.updateGraphic()
+        }
+    }
+    
     func stateChangedTournament(_ switchState: UISwitch) {
         if switchState.isOn {
             tttView.board.tournamentMode = true
             tttView.board.resetBoard()
             tttView.board.resetTournament()
             tttView.updateGraphic()
+            turnLabel.text = "Player \(board.currentPlayer)'s Turn"
             isGameOver = false
             let alert = UIAlertController(title: "Choose Number of Games", message: "Odd numbers only", preferredStyle: UIAlertControllerStyle.alert)
             
@@ -56,7 +79,6 @@ class ViewController: UIViewController {
             alert.addTextField { (textField: UITextField!) in
                 textField.keyboardType = UIKeyboardType.numberPad
             }
-//            alert.addAction(cancelAction)
             alert.addAction(saveAction)
             
             self.present(alert, animated: true, completion: nil)
@@ -64,6 +86,7 @@ class ViewController: UIViewController {
             tttView.board.tournamentMode = false
             gameNumberLabel.text = ""
             tttView.board.resetBoard()
+            turnLabel.text = "Player \(board.currentPlayer)'s Turn"
             tttView.updateGraphic()
             scoreLabel.text = ""
         }
@@ -71,18 +94,9 @@ class ViewController: UIViewController {
     
     @IBAction func resetGame(_ sender: Any) {
         tttView.board.resetBoard()
+        turnLabel.text = "Player \(board.currentPlayer)'s Turn"
         self.tttView.updateGraphic()
         isGameOver = false
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configureView()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func configureView() {
@@ -90,8 +104,12 @@ class ViewController: UIViewController {
             view.board = self.board
             expertModeSwitch.addTarget(self, action: #selector(ViewController.stateChanged(_:)), for: UIControlEvents.valueChanged)
             tournamentModeSwitch.addTarget(self, action: #selector(ViewController.stateChangedTournament(_:)), for: UIControlEvents.valueChanged)
+            nightModeSwitch.addTarget(self, action: #selector(ViewController.stateChangedNightMode(_:)), for: UIControlEvents.valueChanged)
+            turnLabel.text = "Player \(board.currentPlayer)'s Turn"
+            
             if board.tournamentMode == false {
                 gameNumberLabel.text = ""
+                
                 
             } else if board.tournamentMode == true {
 
@@ -117,6 +135,7 @@ class ViewController: UIViewController {
                 }
                 tttView.setNeedsDisplay()
             }
+            turnLabel.text = "Player \(board.currentPlayer)'s Turn"
             self.board = tttView.board
             if board.tournamentMode == false {
                 gameNumberLabel.text = ""
@@ -135,12 +154,13 @@ class ViewController: UIViewController {
                     let seeBoardAction = UIAlertAction(title: "See Board", style: .cancel,
                                                        handler: { (action) -> Void in
                                                         self.isGameOver = true
-                    })
+                                                        self.turnLabel.text = ""})
                     ac.addAction(seeBoardAction)
                     let resetAction = UIAlertAction(title: "Reset Game", style: .destructive,
                                                     handler: { (action) -> Void in
                                                         self.board.resetBoard()
-                                                        self.tttView.updateGraphic() })
+                                                        self.tttView.updateGraphic()
+                                                        self.turnLabel.text = "Player \(self.tttView.board.currentPlayer)'s Turn"})
                     ac.addAction(resetAction)
                     self.present(ac, animated: true, completion: nil)
                     
@@ -167,7 +187,8 @@ class ViewController: UIViewController {
                                                             self.board.resetBoard()
                                                             self.tttView.updateGraphic()
                                                             self.gameNumberLabel.text = "Game \(self.tttView.board.currentGame) of \(self.tttView.board.totalGames)"
-                                                            self.scoreLabel.text = "Score: P1 \(self.tttView.board.winsP1)-\(self.tttView.board.winsP2) P2" })
+                                                            self.scoreLabel.text = "Score: P1 \(self.tttView.board.winsP1)-\(self.tttView.board.winsP2) P2"
+                                                            self.turnLabel.text = "Player \(self.tttView.board.currentPlayer)'s Turn"})
                         ac.addAction(resetAction)
                         self.present(ac, animated: true, completion: nil)
                     } else if board.tournamentWin == 1 || board.tournamentWin == 2{
@@ -184,7 +205,8 @@ class ViewController: UIViewController {
                                                             self.board.tournamentWin = 0
                                                             self.board.currentGame = 1
                                                             self.gameNumberLabel.text = "Game \(self.tttView.board.currentGame) of \(self.tttView.board.totalGames)"
-                                                            self.scoreLabel.text = "Score: P1 \(self.tttView.board.winsP1)-\(self.tttView.board.winsP2) P2" })
+                                                            self.scoreLabel.text = "Score: P1 \(self.tttView.board.winsP1)-\(self.tttView.board.winsP2) P2"
+                                                            self.turnLabel.text = "Player \(self.tttView.board.currentPlayer)'s Turn" })
                         ac.addAction(resetAction)
                         self.present(ac, animated: true, completion: nil)
                     }

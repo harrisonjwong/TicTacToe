@@ -16,14 +16,13 @@ struct Line {
 
 class TTTView : UIView {
     
-    
     var board: TTTBoard!
     var border = CGRect()
     var dimensions: CGFloat = 3
     var graphicCells1 = [CGRect]()
     var graphicCells2 = [CGRect]()
     var graphicEdit: Bool = true //true means adding, false means do nothing
-
+    var nightMode = false
     
     func strokeLine(_ line: Line, width: CGFloat) {
         let path = UIBezierPath()
@@ -35,7 +34,6 @@ class TTTView : UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        
         var l = Line()
         UIColor.black.setStroke()
         //up-down left
@@ -77,7 +75,6 @@ class TTTView : UIView {
         l.begin = CGPoint(x: rekt.minX, y: rekt.maxY)
         l.end = CGPoint(x: rekt.maxX, y: rekt.minY)
         strokeLine(l, width: 3)
-
     }
     
     func strokeCircle(_ c: CGRect) {
@@ -89,6 +86,11 @@ class TTTView : UIView {
     }
     
     func updateGraphic() {
+        if nightMode == true {
+            backgroundColor = UIColor.gray
+        } else {
+            backgroundColor = UIColor.white
+        }
         graphicCells1 = []
         graphicCells2 = []
         for cell in board.boardCells {
@@ -96,7 +98,7 @@ class TTTView : UIView {
                 addCell(cell.x, yCoor: cell.y)
             }
         }
-        setNeedsDisplay()   //updates it after evolving
+        setNeedsDisplay() //updates it after evolving
     }
     
     func makeFrame(_ rect: CGRect) -> CGRect {

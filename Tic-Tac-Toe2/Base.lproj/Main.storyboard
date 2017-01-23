@@ -36,13 +36,13 @@
                                 <rect key="frame" x="815.5" y="45" width="163.5" height="698"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Controls" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uQz-zg-t8x" userLabel="Controls">
-                                        <rect key="frame" x="22.5" y="0.0" width="119" height="145.5"/>
+                                        <rect key="frame" x="22.5" y="0.0" width="119" height="112"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zAV-9A-PJR">
-                                        <rect key="frame" x="27.5" y="145.5" width="109" height="136.5"/>
+                                        <rect key="frame" x="27.5" y="112" width="109" height="105"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Reset Board">
                                             <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -52,36 +52,51 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expert Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HhZ-4H-3UG" userLabel="Expert Mode">
-                                        <rect key="frame" x="25" y="282" width="114" height="90.5"/>
+                                        <rect key="frame" x="25" y="217" width="114" height="70"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1hE-Gw-yoJ" userLabel="Expert Mode">
-                                        <rect key="frame" x="57.5" y="372.5" width="51" height="117.5"/>
+                                        <rect key="frame" x="57.5" y="287" width="51" height="90.5"/>
                                     </switch>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tournament Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i8F-tH-kva">
-                                        <rect key="frame" x="0.0" y="490" width="163.5" height="90.5"/>
+                                        <rect key="frame" x="0.0" y="377.5" width="163.5" height="70"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qcy-Qz-tMS" userLabel="Tournament Mode">
-                                        <rect key="frame" x="57.5" y="580.5" width="51" height="117.5"/>
+                                        <rect key="frame" x="57.5" y="447.5" width="51" height="90"/>
+                                    </switch>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Night Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8EL-DD-7FZ">
+                                        <rect key="frame" x="29.5" y="537.5" width="105" height="70"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2wV-bV-i9d" userLabel="Night Mode">
+                                        <rect key="frame" x="57.5" y="607.5" width="51" height="90.5"/>
                                     </switch>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NYu-F6-c4N">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NYu-F6-c4N">
                                 <rect key="frame" x="45" y="270" width="178" height="248"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DGI-Cg-5Zv" userLabel="Turn Label">
+                                        <rect key="frame" x="86.5" y="0.0" width="5.5" height="82.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eff-lE-Zbh" userLabel="Game Number">
-                                        <rect key="frame" x="86.5" y="0.0" width="5.5" height="124"/>
+                                        <rect key="frame" x="86.5" y="82.5" width="5.5" height="83"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hrk-g3-41c" userLabel="Score">
-                                        <rect key="frame" x="86.5" y="124" width="5.5" height="124"/>
+                                        <rect key="frame" x="86.5" y="165.5" width="5.5" height="82.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -110,9 +125,12 @@
                     <connections>
                         <outlet property="expertModeSwitch" destination="1hE-Gw-yoJ" id="Jk0-Ww-G4e"/>
                         <outlet property="gameNumberLabel" destination="eff-lE-Zbh" id="PsN-pj-R7O"/>
+                        <outlet property="nightModeSwitch" destination="2wV-bV-i9d" id="SBU-KM-CPr"/>
+                        <outlet property="outsideView" destination="8bC-Xf-vdC" id="Dqm-z5-YEC"/>
                         <outlet property="scoreLabel" destination="Hrk-g3-41c" id="Zci-AW-JHb"/>
                         <outlet property="tournamentModeSwitch" destination="qcy-Qz-tMS" id="ud4-qO-osr"/>
                         <outlet property="tttView" destination="RSY-Er-YkK" id="jZg-JV-0C7"/>
+                        <outlet property="turnLabel" destination="DGI-Cg-5Zv" id="xa4-80-sOr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
